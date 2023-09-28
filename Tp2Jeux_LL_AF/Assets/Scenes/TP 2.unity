@@ -517,8 +517,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9553dc926d716b84091b9b7f8c3be5fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playMusic: {fileID: 1755856161}
-  gameOverMusic: {fileID: 1755856160}
 --- !u!82 &1755856160
 AudioSource:
   m_ObjectHideFlags: 0
