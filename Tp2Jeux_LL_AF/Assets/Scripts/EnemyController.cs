@@ -27,7 +27,7 @@ public class EnemyController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         moveToPlayer();
     }
@@ -35,16 +35,7 @@ public class EnemyController : MonoBehaviour
     public void moveToPlayer(){
         
         Vector3 directionPlayer = PlayerController.player.transform.transform.position - transform.position;
-        //transform.Translate(directionPlayer * moveSpeed*Time.deltaTime);
         rigidbody.AddForce(directionPlayer* moveSpeed*Time.deltaTime, ForceMode.Impulse);
         
     }
-   /* public void InitializeEnemy(GameObject gameObject)
-    {
-        System.Random random = new System.Random();
-        int zRand = random.Next(zMin,zMax);
-        int xRand = random.Next(xMin,xMax);
-        Instantiate(gameObject,new Vector3(xRand,1f,zRand),Quaternion.identity);
-    }*/
-    
 }
