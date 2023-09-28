@@ -5,9 +5,9 @@ using UnityEngine;
 public class RotateCamera : MonoBehaviour
 {
     
-    public Camera camera;
+    public new Camera camera;
 
-    public GameObject gameObject;
+    public new GameObject gameObject;
     public float speed = 50f;
 
     // Update is called once per frame
