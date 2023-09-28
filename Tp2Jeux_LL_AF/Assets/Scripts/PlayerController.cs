@@ -17,13 +17,16 @@ public class PlayerController : MonoBehaviour
     private PowerUp.PowerupEnum? powerUpActif = null;
     private float tempsRestantPowerUp = 0 ;
 
+    Material playerMat;
+
     // Start is called before the first frame update
     void Start()
     {
         player = gameObject;
         camera = Camera.main;
         rb = GetComponent<Rigidbody>();
-        physicMaterial = GetComponent<PhysicMaterial>();
+        physicMaterial = GetComponent<SphereCollider>().material;
+        playerMat = GetComponent<MeshRenderer>().material;
     }
 
     // Update is called once per frame
@@ -46,10 +49,12 @@ public class PlayerController : MonoBehaviour
                         physicMaterial.bounciness = defaultBounciness;
                         break;
                     case PowerUp.PowerupEnum.SIZE:
-                        transform.localScale = Vector3.one * 0.5f;
+                        transform.localScale = Vector3.one;
                         break;
                     case PowerUp.PowerupEnum.COLLIDEABLE:
-                        gameObject.GetComponent<Collider>().enabled = true;
+                        gameObject.GetComponent<SphereCollider>().enabled = true;
+                        rb.constraints = rb.constraints & ~RigidbodyConstraints.FreezePositionY;
+                        playerMat.SetInt("_Invisibilite", 0);
                         break;
                 }
 
@@ -74,9 +79,8 @@ public class PlayerController : MonoBehaviour
     /// <param name="powerUp"></param>
     public void EnablePowerUp(PowerUp.PowerupEnum powerUp)
     {
-
         //On empeche d avoir 2 powerups a la fois
-        if (powerUpActif is not null) {
+        if (powerUpActif is null) {
 
             //Initialisation powerUp
             powerUpActif = powerUp;
@@ -93,8 +97,10 @@ public class PlayerController : MonoBehaviour
                     tempsRestantPowerUp = 10;
                     break;
                 case PowerUp.PowerupEnum.COLLIDEABLE:
-                    gameObject.GetComponent<Collider>().enabled = false;
+                    gameObject.GetComponent<SphereCollider>().enabled = false;
+                    rb.constraints = rb.constraints | RigidbodyConstraints.FreezePositionY;
                     tempsRestantPowerUp = 4;
+                    playerMat.SetInt("_Invisibilite", 1);
                     break;
             }
         }
