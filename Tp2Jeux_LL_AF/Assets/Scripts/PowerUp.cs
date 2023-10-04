@@ -34,10 +34,10 @@ public class PowerUp : MonoBehaviour
     {
         if (other.tag.Equals("Player",System.StringComparison.InvariantCultureIgnoreCase)) {
             PlayerController.player.GetComponent<PlayerController>().EnablePowerUp(powerupActuel);
-        }
 
-        //On detruit le powerup
-        Destroy(gameObject);
+            //On detruit le powerup
+            Destroy(gameObject);
+        }
     }
 
     /// <summary>
