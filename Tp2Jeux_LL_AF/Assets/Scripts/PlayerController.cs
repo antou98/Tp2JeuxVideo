@@ -19,12 +19,21 @@ public class PlayerController : MonoBehaviour
 
     Material playerMat;
 
+    public float dureePulsion1 = 0.1f;
+    public float dureePulsion2 = 0.6f;
+
+    private AudioSource playerAudioSource;
+    public AudioClip hitSound;
+
     // Start is called before the first frame update
     void Start()
     {
         //Setup des attributs
         player = gameObject;
         camera = Camera.main;
+
+        //Audio
+        playerAudioSource = player.GetComponent<AudioSource>();
 
         //Physique
         rb = GetComponent<Rigidbody>();
@@ -113,6 +122,51 @@ public class PlayerController : MonoBehaviour
                     playerMat.SetInt("_Invisibilite", 1);
                     break;
             }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //On touche un enemy
+        if (collision.gameObject.tag.Equals("Enemy", StringComparison.InvariantCultureIgnoreCase)) {
+            playerAudioSource.PlayOneShot(hitSound);
+            StartCoroutine(pulsionJoueur());
+        }
+    }
+
+    /// <summary>
+    /// Pulse le joueur vers le rouge
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator pulsionJoueur() {
+        float tempsPasse = 0;
+
+        while (tempsPasse < dureePulsion1)
+        {
+            float progression = tempsPasse / dureePulsion1;
+            playerMat.SetFloat("_Scroll", Mathf.Lerp(0f, 1f, progression));
+            tempsPasse += Time.deltaTime;
+            yield return null;
+        }
+
+        // Réinitialiser la couleur
+        StartCoroutine(ArretPulsionJoueur());
+    }
+
+    /// <summary>
+    /// Arrete le pulse du joueur
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator ArretPulsionJoueur()
+    {
+        float tempsPasse = 0;
+
+        while (tempsPasse < dureePulsion2)
+        {
+            float progression = tempsPasse / dureePulsion2;
+            playerMat.SetFloat("_Scroll", Mathf.Lerp(1f, 0f, progression));
+            tempsPasse += Time.deltaTime;
+            yield return null;
         }
     }
 }
