@@ -22,11 +22,15 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //Setup des attributs
         player = gameObject;
         camera = Camera.main;
+
+        //Physique
         rb = GetComponent<Rigidbody>();
         physicMaterial = GetComponent<SphereCollider>().material;
+
+        //Mat
         playerMat = GetComponent<MeshRenderer>().material;
     }
 
@@ -43,14 +47,16 @@ public class PlayerController : MonoBehaviour
             }
             else {
 
-                //On desactive le powerup
+                //On desactive le powerup et ses visuels
                 switch (powerUpActif) {
 
                     case PowerUp.PowerupEnum.BOUNCE:
                         physicMaterial.bounciness = defaultBounciness;
+                        playerMat.SetInt("_BouncePU", 0);
                         break;
                     case PowerUp.PowerupEnum.SIZE:
                         transform.localScale = Vector3.one;
+                        playerMat.SetFloat("_ScrollDirection", 1f);
                         break;
                     case PowerUp.PowerupEnum.COLLIDEABLE:
                         gameObject.GetComponent<SphereCollider>().enabled = true;
@@ -86,16 +92,19 @@ public class PlayerController : MonoBehaviour
             //Initialisation powerUp
             powerUpActif = powerUp;
 
+            //On active les powerups et leur visuels
             switch (powerUpActif)
             {
                 case PowerUp.PowerupEnum.BOUNCE:
                     defaultBounciness = physicMaterial.bounciness;
                     physicMaterial.bounciness = 0.2f;
                     tempsRestantPowerUp = 15;
+                    playerMat.SetInt("_BouncePU", 1);
                     break;
                 case PowerUp.PowerupEnum.SIZE:
                     transform.localScale = Vector3.one * 2;
                     tempsRestantPowerUp = 10;
+                    playerMat.SetFloat("_ScrollDirection", 0.3f);
                     break;
                 case PowerUp.PowerupEnum.COLLIDEABLE:
                     gameObject.GetComponent<SphereCollider>().enabled = false;
