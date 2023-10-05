@@ -5061,6 +5061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObject: {fileID: 4895586420463836429, guid: 3cb6b060e21769544968a5079e6efd90, type: 3}
+  powerUp: {fileID: 5525738436084382689, guid: 7495314fdb3fb2d4b9441b9f2d15e266, type: 3}
   niveauDifficulte: 0
   nbBadGuysDefaut: 2
   nombreBadGuysActuel: 0
