@@ -37,4 +37,12 @@ public class LevelControler : MonoBehaviour
         int xRand = random.Next(xMin,xMax);
         Instantiate(gameObject,new Vector3(xRand,1f,zRand),Quaternion.identity);
     }
+
+    public void EnemyOutOfBound() { 
+        
+    }
+
+    public void GameOver() { 
+
+    }
 }
