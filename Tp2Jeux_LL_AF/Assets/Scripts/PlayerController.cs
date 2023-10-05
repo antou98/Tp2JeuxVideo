@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         //Deplacer le joueur vers l avant ou l arriere, selon la physique
-        rb.AddForce((camera.transform.forward * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime), ForceMode.Impulse);
+        rb.AddForce((camera.transform.forward * Input.GetAxis("Vertical") * moveSpeed));
     }
 
     /// <summary>
