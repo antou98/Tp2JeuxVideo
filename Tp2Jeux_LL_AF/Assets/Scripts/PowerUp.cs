@@ -13,7 +13,7 @@ public class PowerUp : MonoBehaviour
     void Start()
     {
         //changer aleatoirement
-        int randomPowerup = Random.RandomRange(0, 3);
+        int randomPowerup = Random.Range(0, 3);
         switch (randomPowerup) {
             case 0:
                 powerupActuel = PowerupEnum.BOUNCE;
