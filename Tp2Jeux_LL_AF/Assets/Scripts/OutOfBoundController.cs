@@ -15,4 +15,21 @@ public class OutOfBoundController : MonoBehaviour
     {
         
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        string tag = other.gameObject.tag;
+
+        switch (tag)
+        {
+            case "Player":
+                LevelControler.instance.GameOver();
+                break;
+            case "Enemy":
+                LevelControler.instance.EnemyOutOfBound();
+                Destroy(other.gameObject);
+                break;
+        }
+
+    }
 }
