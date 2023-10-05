@@ -9,6 +9,8 @@ public class LevelControler : MonoBehaviour
     public GameObject gameObject;
     private EnemyController enemyController;
 
+    public GameObject powerUp;
+
     private int zMin = -10;
 
     private int zMax = 10;
@@ -41,11 +43,10 @@ public class LevelControler : MonoBehaviour
         nombreBadGuysActuel = nbBadGuys;
 
         for(int i = 0;i<nbBadGuys;i++){
-            System.Random random = new System.Random();
-            int zRand = random.Next(zMin,zMax);
-            int xRand = random.Next(xMin,xMax);
-            Instantiate(gameObject,new Vector3(xRand,1f,zRand),Quaternion.identity);
-        }   
+            InstantiateRandomSquare(gameObject);
+        }
+
+        spawnPowerUp();
     }
 
     public void EnemyOutOfBound() {  
@@ -58,5 +59,16 @@ public class LevelControler : MonoBehaviour
 
     public void GameOver() { 
 
+    }
+
+    public void spawnPowerUp(){
+        InstantiateRandomSquare(powerUp);
+    }
+
+    public void InstantiateRandomSquare(GameObject gameObjectToInstanciate){
+        System.Random random = new System.Random();
+        int zRand = random.Next(zMin,zMax);
+        int xRand = random.Next(xMin,xMax);
+        Instantiate(gameObjectToInstanciate,new Vector3(xRand,0f,zRand),Quaternion.identity);
     }
 }
