@@ -16,6 +16,9 @@ public class LevelControler : MonoBehaviour
     private int xMax = 7;
 
     private int xMin = -7;
+
+    public int niveauDifficulte = 0;
+
     void Start()
     {
         enemyController =GetComponent<EnemyController>();

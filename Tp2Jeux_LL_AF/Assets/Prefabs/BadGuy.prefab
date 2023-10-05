@@ -128,4 +128,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 4895586420463836428}
-  moveSpeed: 1
+  moveSpeed: 20
