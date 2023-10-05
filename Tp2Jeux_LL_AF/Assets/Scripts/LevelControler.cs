@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class LevelControler : MonoBehaviour
 {
-    
+    public static LevelControler instance;
+
     public GameObject gameObject;
     private EnemyController enemyController;
 
@@ -22,6 +23,7 @@ public class LevelControler : MonoBehaviour
         for(int i = 0;i<level;i++){
             InitializeEnemy();
         }
+        instance = this;
     }
 
     // Update is called once per frame
