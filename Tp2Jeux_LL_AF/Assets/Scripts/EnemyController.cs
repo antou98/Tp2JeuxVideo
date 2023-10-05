@@ -17,6 +17,8 @@ public class EnemyController : MonoBehaviour
     {
         physicMaterial = GetComponent<SphereCollider>().material;
         ennemyMat = GetComponent<MeshRenderer>().material;
+
+        InitializeEnemy();
     }
 
     // Update is called once per frame
@@ -29,10 +31,12 @@ public class EnemyController : MonoBehaviour
         int difficulte = LevelControler.instance.niveauDifficulte;
 
         // Set mat ennemi selon difficulte
+        ennemyMat.SetFloat("_Difficulte", difficulte);
 
         // Set de la physique
-        physicMaterial.bounciness = Mathf.Lerp(1,0,Mathf.Clamp(difficulte,0,10)/10);
-        //transform.localScale = new Vector3(1, Mathf.Lerp(1, 3, Mathf.Clamp(difficulte, 0, 10) / 10), 1);
+        physicMaterial.bounciness = Mathf.Clamp(difficulte,1,10)/10;
+        float sizeActuel = Mathf.Lerp(1,3, Mathf.Clamp(difficulte, 1, 10)/10.0f);
+        transform.localScale = new Vector3(sizeActuel,sizeActuel, sizeActuel);
     }
 
     public void moveToPlayer(){
