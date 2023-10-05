@@ -16,14 +16,17 @@ public class LevelControler : MonoBehaviour
     private int xMax = 7;
 
     private int xMin = -7;
+
+    public int niveauDifficulte = 0;
+
+    public int nbBadGuysDefaut= 2;
+
+    public int nombreBadGuysActuel;
     void Start()
     {
         enemyController =GetComponent<EnemyController>();
-        int level = 2;
-        for(int i = 0;i<level;i++){
-            InitializeEnemy();
-        }
         instance = this;
+        InitializeEnemy();
     }
 
     // Update is called once per frame
@@ -34,14 +37,23 @@ public class LevelControler : MonoBehaviour
 
     public void InitializeEnemy()
     {
-        System.Random random = new System.Random();
-        int zRand = random.Next(zMin,zMax);
-        int xRand = random.Next(xMin,xMax);
-        Instantiate(gameObject,new Vector3(xRand,1f,zRand),Quaternion.identity);
+        int nbBadGuys = nbBadGuysDefaut+niveauDifficulte;
+        nombreBadGuysActuel = nbBadGuys;
+
+        for(int i = 0;i<nbBadGuys;i++){
+            System.Random random = new System.Random();
+            int zRand = random.Next(zMin,zMax);
+            int xRand = random.Next(xMin,xMax);
+            Instantiate(gameObject,new Vector3(xRand,1f,zRand),Quaternion.identity);
+        }   
     }
 
-    public void EnemyOutOfBound() { 
-        
+    public void EnemyOutOfBound() {  
+        nombreBadGuysActuel--;
+        if(nombreBadGuysActuel==0){
+            niveauDifficulte++;
+            InitializeEnemy();
+        }
     }
 
     public void GameOver() { 

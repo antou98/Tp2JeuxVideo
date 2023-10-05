@@ -7,15 +7,6 @@ using UnityEngine.EventSystems;
 public class EnemyController : MonoBehaviour
 {
 
-
-    /*private int zMin = -10;
-
-    private int zMax = 10;
-
-    private int xMax = 7;
-
-    private int xMin = -7;*/
-
     public Rigidbody rigidbody;
 
     public float moveSpeed = 0.000001f;

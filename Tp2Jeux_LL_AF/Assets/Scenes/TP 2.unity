@@ -5057,11 +5057,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 497357614}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0976fcc8bc4b279418090a758a7c3445, type: 3}
+  m_Script: {fileID: 11500000, guid: e30707a7050103a46b7c56da1b73df29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody: {fileID: 4895586420463836428, guid: 3cb6b060e21769544968a5079e6efd90, type: 3}
-  moveSpeed: 0.000001
+  gameObject: {fileID: 4895586420463836429, guid: 3cb6b060e21769544968a5079e6efd90, type: 3}
+  niveauDifficulte: 0
+  nbBadGuysDefaut: 2
+  nombreBadGuysActuel: 0
 --- !u!1 &1211016355
 GameObject:
   m_ObjectHideFlags: 0
