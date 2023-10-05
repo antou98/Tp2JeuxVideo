@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
+using UnityEngine.SceneManagement;
 public class LevelControler : MonoBehaviour
 {
     public static LevelControler instance;
 
     public GameObject gameObject;
+
     private EnemyController enemyController;
 
     public GameObject powerUp;
+
+    public GameObject vueFinal;
+
+    public bool isGameOver = false;
 
     private int zMin = -10;
 
@@ -26,9 +32,12 @@ public class LevelControler : MonoBehaviour
     public int nombreBadGuysActuel;
     void Start()
     {
+        vueFinal.SetActive(false);
         enemyController =GetComponent<EnemyController>();
         instance = this;
         InitializeEnemy();
+        spawnPowerUp();
+        
     }
 
     // Update is called once per frame
@@ -45,20 +54,25 @@ public class LevelControler : MonoBehaviour
         for(int i = 0;i<nbBadGuys;i++){
             InstantiateRandomSquare(gameObject);
         }
-
-        spawnPowerUp();
     }
 
     public void EnemyOutOfBound() {  
+        if(!isGameOver){
         nombreBadGuysActuel--;
         if(nombreBadGuysActuel==0){
             niveauDifficulte++;
             InitializeEnemy();
-        }
+            spawnPowerUp();
+        }}
     }
 
     public void GameOver() { 
+        isGameOver = true;
+        vueFinal.SetActive(true);
+    }
 
+    public void Restart(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void spawnPowerUp(){
