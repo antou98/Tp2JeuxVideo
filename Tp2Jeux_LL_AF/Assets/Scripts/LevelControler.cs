@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class LevelControler : MonoBehaviour
 {
-    
+    public static LevelControler instance;
+
     public GameObject gameObject;
     private EnemyController enemyController;
 
@@ -22,6 +23,7 @@ public class LevelControler : MonoBehaviour
         for(int i = 0;i<level;i++){
             InitializeEnemy();
         }
+        instance = this;
     }
 
     // Update is called once per frame
@@ -36,5 +38,13 @@ public class LevelControler : MonoBehaviour
         int zRand = random.Next(zMin,zMax);
         int xRand = random.Next(xMin,xMax);
         Instantiate(gameObject,new Vector3(xRand,1f,zRand),Quaternion.identity);
+    }
+
+    public void EnemyOutOfBound() { 
+        
+    }
+
+    public void GameOver() { 
+
     }
 }
